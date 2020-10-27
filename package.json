@@ -1,6 +1,6 @@
 {
   "name": "animated-numbers-react",
-  "version": "1.0.12",
+  "version": "1.0.301",
   "main": "build/index.js",
   "module": "build/index.es.js",
   "jsnext:main": "build/index.es.js",
