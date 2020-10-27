@@ -29,7 +29,10 @@ const AnimatedNumbersReact: React.FC<Props> = (props) => {
   const [fromValue, setFromValue] = React.useState(initialValue);
   const [startTime, setStartTime] = React.useState(0);
   const [currentTime, setCurrentTime] = React.useState(0);
-  const [tweenHandle, setTweenHandle] = React.useState();
+  const [tweenHandle, setTweenHandle] = React.useState() as [
+    any,
+    React.Dispatch<any>
+  ];
 
   React.useEffect(() => {
     prepareTween();
@@ -55,7 +58,8 @@ const AnimatedNumbersReact: React.FC<Props> = (props) => {
     return !currentTime || timestamp - currentTime > 16;
   };
 
-  const tweenValue = (timestamp: number, start: any) => {
+  const tweenValue = (timestamp: any, start: any): any => {
+    // @ts-ignore
     if (!ensureSixtyFps(timestamp)) return setTweenHandle(raf(tweenValue));
 
     const nCurrentTime = timestamp;
@@ -74,10 +78,10 @@ const AnimatedNumbersReact: React.FC<Props> = (props) => {
     if (newValue === value) return endTween();
 
     setCurrentValue(newValue);
-    setStartTime(nStartTime ? nStartTime : nCurrentTime)
+    setStartTime(nStartTime ? nStartTime : nCurrentTime);
     setFromValue(nFromValue);
     setCurrentTime(nCurrentTime);
-    
+    // @ts-ignore
     setTweenHandle(raf(tweenValue));
   };
 
